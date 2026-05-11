@@ -14,4 +14,6 @@ Interview-ready QA automation framework using Playwright, TypeScript, Page Objec
 ```bash
 npm install
 npx playwright test
+npx playwright test --grep @smoke
+npx playwright test --grep @regression
 npx playwright show-report
