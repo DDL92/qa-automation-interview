@@ -1,5 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
-import * as dotenv from 'dotenv';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
@@ -17,11 +17,10 @@ export default defineConfig({
   reporter: [
     ['html'],
     ['list'],
-    ['allure-playwright'],
   ],
 
   use: {
-    baseURL: process.env.BASE_URL,
+    baseURL: process.env.BASE_URL ?? 'https://www.saucedemo.com',
 
     trace: 'on-first-retry',
 
@@ -30,15 +29,6 @@ export default defineConfig({
     video: 'retain-on-failure',
 
     headless: true,
-
-    viewport: {
-      width: 1440,
-      height: 900,
-    },
-
-    actionTimeout: 10000,
-
-    navigationTimeout: 30000,
   },
 
   projects: [
@@ -63,6 +53,4 @@ export default defineConfig({
       },
     },
   ],
-
-  webServer: undefined,
 });
