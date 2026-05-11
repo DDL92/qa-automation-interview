@@ -1,0 +1,45 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: checkout.spec.ts >> Checkout flow >> @smoke should complete checkout from cart to order confirmation
+- Location: tests/checkout.spec.ts:13:7
+
+# Error details
+
+```
+Error: page.goto: Protocol error (Page.navigate): Invalid url: "/"
+Call log:
+  - navigating to "/", waiting until "load"
+
+```
+
+# Test source
+
+```ts
+  1  | import { Page, expect } from "@playwright/test";
+  2  | 
+  3  | export class LoginPage {
+  4  |   constructor(private readonly page: Page) {}
+  5  | 
+  6  |   async goto() {
+> 7  |     await this.page.goto("/");
+     |                     ^ Error: page.goto: Protocol error (Page.navigate): Invalid url: "/"
+  8  |   }
+  9  | 
+  10 |   async login(username: string, password: string) {
+  11 |     await this.page.locator('[data-test="username"]').fill(username);
+  12 |     await this.page.locator('[data-test="password"]').fill(password);
+  13 |     await this.page.locator('[data-test="login-button"]').click();
+  14 |   }
+  15 | 
+  16 |   async expectLoginError() {
+  17 |     await expect(this.page.locator('[data-test="error"]')).toBeVisible();
+  18 |   }
+  19 | }
+  20 | 
+```
