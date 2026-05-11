@@ -33,8 +33,8 @@ export class CheckoutPage {
 
   async expectOrderComplete() {
     await expect(this.page).toHaveURL(/checkout-complete.html/);
-    await expect(this.page.locator('.complete-header')).toHaveText(
-      'THANK YOU FOR YOUR ORDER',
+    await expect(this.page.locator('[data-test="complete-header"]')).toHaveText(
+      'Thank you for your order!',
     );
   }
 }
