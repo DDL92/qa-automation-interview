@@ -5,7 +5,9 @@ export class CheckoutPage {
 
   async expectCheckoutInformationScreen() {
     await expect(this.page).toHaveURL(/checkout-step-one.html/);
-    await expect(this.page.locator('.title')).toHaveText('Checkout: Your Information');
+    await expect(
+      this.page.getByText('Checkout: Your Information', { exact: true }),
+    ).toBeVisible();
   }
 
   async enterShippingInformation(
@@ -24,7 +26,9 @@ export class CheckoutPage {
 
   async expectOverviewScreen() {
     await expect(this.page).toHaveURL(/checkout-step-two.html/);
-    await expect(this.page.locator('.title')).toHaveText('Checkout: Overview');
+    await expect(
+      this.page.getByText('Checkout: Overview', { exact: true }),
+    ).toBeVisible();
   }
 
   async finishCheckout() {

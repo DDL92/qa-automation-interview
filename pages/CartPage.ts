@@ -5,7 +5,9 @@ export class CartPage {
 
   async expectLoaded() {
     await expect(this.page).toHaveURL(/cart.html/);
-    await expect(this.page.locator('.title')).toHaveText('Your Cart');
+    await expect(
+      this.page.getByText('Your Cart', { exact: true }),
+    ).toBeVisible();
   }
 
   async startCheckout() {

@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "playwright test",
+    "smoke": "playwright test --grep @smoke",
+    "regression": "playwright test --grep @regression",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug",
     "report": "playwright show-report"
@@ -17,6 +19,7 @@
     "@playwright/test": "^1.59.1",
     "@types/node": "^25.6.2",
     "allure-playwright": "^3.7.2",
+    "dotenv": "^16.6.1",
     "prettier": "^3.8.3"
   }
 }

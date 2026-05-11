@@ -1,9 +1,7 @@
-import { test } from "@playwright/test";
+import { test } from "./authFixtures";
 import { CartPage } from "../pages/CartPage";
 import { CheckoutPage } from "../pages/CheckoutPage";
 import { InventoryPage } from "../pages/InventoryPage";
-import { LoginPage } from "../pages/LoginPage";
-import { users } from "../test-data/users";
 
 const shipping = {
   firstName: "Test",
@@ -13,17 +11,14 @@ const shipping = {
 
 test.describe("Checkout flow", () => {
   test("@smoke should complete checkout from cart to order confirmation", async ({
-    page,
+    loggedInPage,
   }) => {
     // Arrange
-    const loginPage = new LoginPage(page);
-    const inventoryPage = new InventoryPage(page);
-    const cartPage = new CartPage(page);
-    const checkoutPage = new CheckoutPage(page);
+    const inventoryPage = new InventoryPage(loggedInPage);
+    const cartPage = new CartPage(loggedInPage);
+    const checkoutPage = new CheckoutPage(loggedInPage);
 
     // Act
-    await loginPage.goto();
-    await loginPage.login(users.standard.username, users.standard.password);
     await inventoryPage.expectLoaded();
 
     await inventoryPage.addBackpackToCart();

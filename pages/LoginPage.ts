@@ -8,9 +8,9 @@ export class LoginPage {
   }
 
   async login(username: string, password: string) {
-    await this.page.getByPlaceholder("Username").fill(username);
-    await this.page.getByPlaceholder("Password").fill(password);
-    await this.page.getByRole("button", { name: "Login" }).click();
+    await this.page.locator('[data-test="username"]').fill(username);
+    await this.page.locator('[data-test="password"]').fill(password);
+    await this.page.locator('[data-test="login-button"]').click();
   }
 
   async expectLoginError() {

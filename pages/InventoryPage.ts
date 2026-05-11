@@ -6,7 +6,7 @@ export class InventoryPage {
   async expectLoaded() {
     await expect(this.page).toHaveURL(/inventory/);
     await expect(this.page.locator('[data-test="title"]')).toHaveText(
-      "Products",
+      'Products',
     );
   }
 
