@@ -1,0 +1,24 @@
+{
+  "name": "qa-automation-interview",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm --prefix playwright-interview/playwright-framework run test --",
+    "test:smoke": "npm --prefix playwright-interview/playwright-framework run test:smoke --",
+    "test:regression": "npm --prefix playwright-interview/playwright-framework run test:regression --",
+    "test:api": "npm --prefix playwright-interview/playwright-framework run test:api --",
+    "test:headed": "npm --prefix playwright-interview/playwright-framework run test:headed --",
+    "test:ui": "npm --prefix playwright-interview/playwright-framework run test:ui --",
+    "test:debug": "npm --prefix playwright-interview/playwright-framework run test:debug --",
+    "report": "npm --prefix playwright-interview/playwright-framework run report --",
+    "format": "npm --prefix playwright-interview/playwright-framework run format --"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.60.0"
+  }
+}
