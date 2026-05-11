@@ -6,6 +6,12 @@ dotenv.config();
 export default defineConfig({
   testDir: './tests',
 
+  timeout: 30000,
+
+  expect: {
+    timeout: 5000,
+  },
+
   fullyParallel: true,
 
   forbidOnly: !!process.env.CI,
@@ -20,15 +26,27 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: process.env.BASE_URL ?? 'https://www.saucedemo.com',
+    baseURL:
+      process.env.BASE_URL || 'https://www.saucedemo.com',
 
-    trace: 'on-first-retry',
+    headless: true,
+
+    viewport: {
+      width: 1440,
+      height: 900,
+    },
+
+    actionTimeout: 10000,
+
+    navigationTimeout: 15000,
 
     screenshot: 'only-on-failure',
 
+    trace: 'on-first-retry',
+
     video: 'retain-on-failure',
 
-    headless: true,
+    ignoreHTTPSErrors: true,
   },
 
   projects: [
