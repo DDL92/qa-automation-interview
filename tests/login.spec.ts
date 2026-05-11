@@ -1,10 +1,12 @@
-import { test } from '@playwright/test';
-import { LoginPage } from '../pages/LoginPage';
-import { InventoryPage } from '../pages/InventoryPage';
-import { users } from '../test-data/users';
+import { test } from "@playwright/test";
+import { LoginPage } from "../pages/LoginPage";
+import { InventoryPage } from "../pages/InventoryPage";
+import { users } from "../test-data/users";
 
-test.describe('Login', () => {
-  test('@smoke should login successfully with valid credentials', async ({ page }) => {
+test.describe("Login", () => {
+  test("@smoke should login successfully with valid credentials", async ({
+    page,
+  }) => {
     // Arrange
     const loginPage = new LoginPage(page);
     const inventoryPage = new InventoryPage(page);
@@ -17,7 +19,9 @@ test.describe('Login', () => {
     await inventoryPage.expectLoaded();
   });
 
-  test('@regression should show error with invalid credentials', async ({ page }) => {
+  test("@regression should show error with invalid credentials", async ({
+    page,
+  }) => {
     // Arrange
     const loginPage = new LoginPage(page);
 
