@@ -1,7 +1,25 @@
+<<<<<<< HEAD
 node_modules
 playwright-report
 test-results
 allure-results
 allure-report
 .env
+=======
+
+# Playwright
+node_modules/
+/test-results/
+/playwright-report/
+/blob-report/
+/allure-results/
+/allure-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Environment variables
+.env
+
+# OS files
+>>>>>>> 9a4f379c56b55fe6b6fcd345979d9823bcaacdcb
 .DS_Store

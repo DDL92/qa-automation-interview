@@ -1,9 +1,14 @@
 {
+<<<<<<< HEAD
   "name": "qa-automation-interview",
+=======
+  "name": "playwright-framework",
+>>>>>>> 9a4f379c56b55fe6b6fcd345979d9823bcaacdcb
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
+<<<<<<< HEAD
     "test": "npm --prefix playwright-interview/playwright-framework run test --",
     "test:smoke": "npm --prefix playwright-interview/playwright-framework run test:smoke --",
     "test:regression": "npm --prefix playwright-interview/playwright-framework run test:regression --",
@@ -13,12 +18,36 @@
     "test:debug": "npm --prefix playwright-interview/playwright-framework run test:debug --",
     "report": "npm --prefix playwright-interview/playwright-framework run report --",
     "format": "npm --prefix playwright-interview/playwright-framework run format --"
+=======
+    "test": "npx playwright test",
+    "test:smoke": "npx playwright test --grep @smoke",
+    "test:regression": "npx playwright test --grep @regression",
+    "test:api": "npx playwright test --project api",
+    "test:ci": "npx playwright test --grep @smoke",
+    "test:allure": "ENABLE_ALLURE=true npx playwright test",
+    "test:headed": "npx playwright test --headed",
+    "test:ui": "npx playwright test --ui",
+    "test:debug": "npx playwright test --debug",
+    "typecheck": "npx tsc --noEmit",
+    "report": "npx playwright show-report",
+    "codegen": "npx playwright codegen",
+    "lint": "npx eslint .",
+    "format": "npx prettier --write ."
+>>>>>>> 9a4f379c56b55fe6b6fcd345979d9823bcaacdcb
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+<<<<<<< HEAD
     "@playwright/test": "^1.60.0"
+=======
+    "@playwright/test": "^1.59.1",
+    "@types/node": "^25.6.2",
+    "allure-playwright": "^3.7.2",
+    "dotenv": "^16.6.1",
+    "prettier": "^3.8.3"
+>>>>>>> 9a4f379c56b55fe6b6fcd345979d9823bcaacdcb
   }
 }
