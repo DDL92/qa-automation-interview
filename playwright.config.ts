@@ -1,7 +1,20 @@
-import { defineConfig, devices } from '@playwright/test';
-import dotenv from 'dotenv';
+import { defineConfig, devices, type ReporterDescription } from '@playwright/test';
+import { env } from './config/env';
 
-dotenv.config();
+const uiTestIgnore = /tests\/api\//;
+const apiTestMatch = /tests\/api\/.*\.spec\.ts/;
+const reporters: ReporterDescription[] = [
+  ['list'],
+  ['html', { open: 'never' }],
+];
+
+if (env.ci) {
+  reporters.push(['junit', { outputFile: 'test-results/junit.xml' }]);
+}
+
+if (env.enableAllure) {
+  reporters.push(['allure-playwright']);
+}
 
 export default defineConfig({
   testDir: './tests',
@@ -16,18 +29,14 @@ export default defineConfig({
 
   forbidOnly: !!process.env.CI,
 
-  retries: process.env.CI ? 2 : 0,
+  retries: env.ci ? 2 : 0,
 
-  workers: process.env.CI ? 1 : undefined,
+  workers: env.workers ?? (env.ci ? 1 : undefined),
 
-  reporter: [
-    ['html'],
-    ['list'],
-  ],
+  reporter: reporters,
 
   use: {
-    baseURL:
-      process.env.BASE_URL || 'https://www.saucedemo.com',
+    baseURL: env.baseUrl,
 
     headless: true,
 
@@ -52,6 +61,7 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
+      testIgnore: uiTestIgnore,
       use: {
         ...devices['Desktop Chrome'],
       },
@@ -59,6 +69,7 @@ export default defineConfig({
 
     {
       name: 'firefox',
+      testIgnore: uiTestIgnore,
       use: {
         ...devices['Desktop Firefox'],
       },
@@ -66,8 +77,17 @@ export default defineConfig({
 
     {
       name: 'webkit',
+      testIgnore: uiTestIgnore,
       use: {
         ...devices['Desktop Safari'],
+      },
+    },
+
+    {
+      name: 'api',
+      testMatch: apiTestMatch,
+      use: {
+        baseURL: env.apiBaseUrl,
       },
     },
   ],

@@ -5,7 +5,7 @@ test.describe("JSONPlaceholder API", () => {
     request,
   }) => {
     // Arrange
-    const url = "https://jsonplaceholder.typicode.com/users/1";
+    const url = "/users/1";
 
     // Act
     const response = await request.get(url);

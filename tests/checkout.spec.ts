@@ -1,44 +1,31 @@
-import { test } from "./authFixtures";
-import { CartPage } from "../pages/CartPage";
-import { CheckoutPage } from "../pages/CheckoutPage";
-import { InventoryPage } from "../pages/InventoryPage";
-
-const shipping = {
-  firstName: "Test",
-  lastName: "User",
-  postalCode: "90210",
-};
+import { test } from "./fixtures";
+import { checkoutData } from "../test-data/checkout";
 
 test.describe("Checkout flow", () => {
   test("@smoke should complete checkout from cart to order confirmation", async ({
-    loggedInPage,
+    authenticatedApp,
   }) => {
-    // Arrange
-    const inventoryPage = new InventoryPage(loggedInPage);
-    const cartPage = new CartPage(loggedInPage);
-    const checkoutPage = new CheckoutPage(loggedInPage);
-
     // Act
-    await inventoryPage.expectLoaded();
+    await authenticatedApp.inventory.expectLoaded();
 
-    await inventoryPage.addBackpackToCart();
-    await inventoryPage.openCart();
+    await authenticatedApp.inventory.addBackpackToCart();
+    await authenticatedApp.inventory.openCart();
 
-    await cartPage.expectLoaded();
-    await cartPage.startCheckout();
+    await authenticatedApp.cart.expectLoaded();
+    await authenticatedApp.cart.startCheckout();
 
-    await checkoutPage.expectCheckoutInformationScreen();
-    await checkoutPage.enterShippingInformation(
-      shipping.firstName,
-      shipping.lastName,
-      shipping.postalCode,
+    await authenticatedApp.checkout.expectCheckoutInformationScreen();
+    await authenticatedApp.checkout.enterShippingInformation(
+      checkoutData.defaultShippingAddress.firstName,
+      checkoutData.defaultShippingAddress.lastName,
+      checkoutData.defaultShippingAddress.postalCode,
     );
-    await checkoutPage.continueToOverview();
+    await authenticatedApp.checkout.continueToOverview();
 
-    await checkoutPage.expectOverviewScreen();
-    await checkoutPage.finishCheckout();
+    await authenticatedApp.checkout.expectOverviewScreen();
+    await authenticatedApp.checkout.finishCheckout();
 
     // Assert
-    await checkoutPage.expectOrderComplete();
+    await authenticatedApp.checkout.expectOrderComplete();
   });
 });

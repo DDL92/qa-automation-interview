@@ -4,8 +4,13 @@ node_modules/
 /test-results/
 /playwright-report/
 /blob-report/
+/allure-results/
+/allure-report/
 /playwright/.cache/
 /playwright/.auth/
 
 # Environment variables
 .env
+
+# OS files
+.DS_Store
