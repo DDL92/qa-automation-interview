@@ -1,22 +1,18 @@
 import { test, expect } from '@playwright/test';
 
-test.describe('Reqres API Tests', () => {
-
-  test('GET user details should return status 200', async ({ request }) => {
-
+test.describe('JSONPlaceholder API Tests', () => {
+  test('@api GET user details should return status 200', async ({ request }) => {
     // Arrange
-    const url = 'https://reqres.in/api/users/2';
+    const url = 'https://jsonplaceholder.typicode.com/users/1';
 
     // Act
     const response = await request.get(url);
+    const responseBody = await response.json();
 
     // Assert
     expect(response.status()).toBe(200);
-
-    const responseBody = await response.json();
-
-    expect(responseBody.data.id).toBe(2);
-    expect(responseBody.data.email).toContain('@reqres.in');
+    expect(responseBody.id).toBe(1);
+    expect(responseBody.email).toContain('@');
+    expect(responseBody.name).toBeTruthy();
   });
-
 });
