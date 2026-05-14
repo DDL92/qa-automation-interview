@@ -2,29 +2,16 @@ name: Playwright Tests
 
 on:
   push:
-    branches: [main]
-<<<<<<< HEAD
+    branches: [main, master]
   pull_request:
-    branches: [main]
-
-jobs:
-  test:
-=======
-
-  pull_request:
-    branches: [main]
-
+    branches: [main, master]
   workflow_dispatch:
 
 jobs:
   test:
-    timeout-minutes: 60
->>>>>>> 9a4f379c56b55fe6b6fcd345979d9823bcaacdcb
+    name: Run Playwright UI/API Tests
     runs-on: ubuntu-latest
-
-    defaults:
-      run:
-        working-directory: playwright-interview/playwright-framework
+    timeout-minutes: 30
 
     steps:
       - name: Checkout repository
@@ -33,9 +20,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: lts/*
           cache: npm
-          cache-dependency-path: playwright-interview/playwright-framework/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -43,40 +29,14 @@ jobs:
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
-<<<<<<< HEAD
       - name: Run Playwright tests
         run: npx playwright test
-
-      - name: Upload Playwright report
-        uses: actions/upload-artifact@v4
-        if: always()
-=======
-      - name: Typecheck
-        run: npm run typecheck
-
-      - name: Run Playwright smoke tests
-        run: npm run test:ci
-        env:
-          BASE_URL: https://www.saucedemo.com
-          API_BASE_URL: https://jsonplaceholder.typicode.com
 
       - name: Upload Playwright HTML report
         if: always()
         uses: actions/upload-artifact@v4
->>>>>>> 9a4f379c56b55fe6b6fcd345979d9823bcaacdcb
         with:
           name: playwright-report
-          path: playwright-interview/playwright-framework/playwright-report/
+          path: playwright-report/
           retention-days: 30
-<<<<<<< HEAD
           
-=======
-
-      - name: Upload Playwright test artifacts
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-test-results
-          path: playwright-interview/playwright-framework/test-results/
-          retention-days: 30
->>>>>>> 9a4f379c56b55fe6b6fcd345979d9823bcaacdcb
