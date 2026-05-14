@@ -1,94 +1,53 @@
-import { defineConfig, devices, type ReporterDescription } from '@playwright/test';
-import { env } from './config/env';
-
-const uiTestIgnore = /tests\/api\//;
-const apiTestMatch = /tests\/api\/.*\.spec\.ts/;
-const reporters: ReporterDescription[] = [
-  ['list'],
-  ['html', { open: 'never' }],
-];
-
-if (env.ci) {
-  reporters.push(['junit', { outputFile: 'test-results/junit.xml' }]);
-}
-
-if (env.enableAllure) {
-  reporters.push(['allure-playwright']);
-}
+import { defineConfig, devices } from '@playwright/test';
 
 export default defineConfig({
   testDir: './tests',
-
-  timeout: 30000,
-
-  expect: {
-    timeout: 5000,
-  },
 
   fullyParallel: true,
 
   forbidOnly: !!process.env.CI,
 
-  retries: env.ci ? 2 : 0,
+  retries: process.env.CI ? 2 : 0,
 
-  workers: env.workers ?? (env.ci ? 1 : undefined),
+  workers: process.env.CI ? 1 : undefined,
 
-  reporter: reporters,
+  reporter: [
+    ['html'],
+    ['list']
+  ],
 
   use: {
-    baseURL: env.baseUrl,
-
-    headless: true,
-
-    viewport: {
-      width: 1440,
-      height: 900,
-    },
-
-    actionTimeout: 10000,
-
-    navigationTimeout: 15000,
-
-    screenshot: 'only-on-failure',
+    baseURL: 'https://www.saucedemo.com',
 
     trace: 'on-first-retry',
 
+    screenshot: 'only-on-failure',
+
     video: 'retain-on-failure',
 
-    ignoreHTTPSErrors: true,
+    headless: true
   },
 
   projects: [
     {
       name: 'chromium',
-      testIgnore: uiTestIgnore,
       use: {
-        ...devices['Desktop Chrome'],
-      },
+        ...devices['Desktop Chrome']
+      }
     },
 
     {
       name: 'firefox',
-      testIgnore: uiTestIgnore,
       use: {
-        ...devices['Desktop Firefox'],
-      },
+        ...devices['Desktop Firefox']
+      }
     },
 
     {
       name: 'webkit',
-      testIgnore: uiTestIgnore,
       use: {
-        ...devices['Desktop Safari'],
-      },
-    },
-
-    {
-      name: 'api',
-      testMatch: apiTestMatch,
-      use: {
-        baseURL: env.apiBaseUrl,
-      },
-    },
-  ],
+        ...devices['Desktop Safari']
+      }
+    }
+  ]
 });
