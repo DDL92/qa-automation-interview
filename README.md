@@ -1,55 +1,55 @@
-# QA Automation Interview Framework
+# Playwright + TypeScript QA Automation Framework
 
-Interview-ready QA automation framework using Playwright, TypeScript, Page Object Model, reusable test data, GitHub Actions, and reporting.
+Enterprise-style QA Automation framework built using Playwright + TypeScript following scalable automation architecture and modern QA engineering best practices.
 
 ## Tech Stack
-- Playwright
-- TypeScript
-- GitHub Actions
-- Allure Reporter
-- Cypress demo
 
-## Run Tests
+* Playwright
+* TypeScript
+* GitHub Actions
+* Node.js
+* API Testing
+* Page Object Model (POM)
+* CI/CD Pipelines
 
-```bash
+## Framework Features
+
+* End-to-End UI Automation
+* API Automation
+* Reusable Fixtures
+* Cross-browser Testing
+* Scalable Folder Structure
+* Environment Configuration
+* Reporting & Debugging
+* CI/CD Integration
+
+## Project Structure
+
+/pages
+/tests
+/fixtures
+/utils
+/config
+/playwright.config.ts
+
+## CI/CD
+
+Integrated with GitHub Actions for automated regression execution and continuous validation.
+
+## How To Run
+
 npm install
-npm test
-npm run test:smoke
-npm run test:regression
-npm run test:api
-npm run typecheck
-npm run report
-```
 
-## Enterprise Architecture Direction
+npx playwright test
 
-Current framework responsibilities are split across:
+## Reporting
 
-- `config/`: typed environment and runtime configuration.
-- `pages/`: page objects and `AppPages` composition root.
-- `test-data/`: reusable test personas and scenario data.
-- `tests/fixtures.ts`: the single Playwright fixture entry point.
-- `tests/api/`: API-only tests that run in the `api` project.
+Playwright HTML Reports
 
-Recommended next folder evolution as the suite grows:
+## AI-Assisted Development
 
-```text
-fixtures/
-  test.ts
-  auth.fixture.ts
-  pageObjects.fixture.ts
-pages/
-  base.page.ts
-  app.pages.ts
-tests/
-  ui/
-  api/
-test-data/
-  users.ts
-  checkout.ts
-utils/
-  apiClient.ts
-  testAnnotations.ts
-config/
-  env.ts
-```
+This framework was developed using AI-assisted engineering workflows with:
+
+* GitHub Copilot
+* OpenAI Codex
+* Claude Code
