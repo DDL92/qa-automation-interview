@@ -1,25 +1,22 @@
-import { test, expect } from "@playwright/test";
+import { test, expect } from '@playwright/test';
 
-test.describe("JSONPlaceholder API", () => {
-  test("@api GET request should return user details with status 200", async ({
-    request,
-  }) => {
+test.describe('Reqres API Tests', () => {
+
+  test('GET user details should return status 200', async ({ request }) => {
+
     // Arrange
-    const url = "/users/1";
+    const url = 'https://reqres.in/api/users/2';
 
     // Act
     const response = await request.get(url);
-    const responseBody = await response.json();
 
     // Assert
     expect(response.status()).toBe(200);
-    expect(responseBody).toEqual(
-      expect.objectContaining({
-        id: 1,
-        email: expect.any(String),
-        name: expect.any(String),
-        username: expect.any(String),
-      }),
-    );
+
+    const responseBody = await response.json();
+
+    expect(responseBody.data.id).toBe(2);
+    expect(responseBody.data.email).toContain('@reqres.in');
   });
+
 });
